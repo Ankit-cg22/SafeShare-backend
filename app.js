@@ -3,8 +3,10 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const File  = require('./models/File')
+const ShortURL = require('./models/shortURL')
 const multer = require('multer')
 const cors = require('cors');
+const shortid = require('shortid')
 
 const app = express()
 app.use(express.urlencoded({extended : true}))    
@@ -66,5 +68,30 @@ app.get('/file/:id' , async (req,res) => {
     
     res.status(200).json(data)
 })
+
+
+app.post('/short-url' , async (req, res)=>{
+    console.log(req.body.fullURL)
+    new_shortid = shortid.generate()
+    const newURL = await ShortURL.create({full : req.body.fullURL , short : new_shortid})
+    console.log(newURL)
+    res.json({shortUrl : newURL.short })
+})
+
+app.get('/su/:shorturl' , async (req,res)=>{
+    const shorturl = req.params.shorturl
+    const urldata = await ShortURL.findOne({ short : shorturl })
+
+    if(urldata == null)
+    {
+        return res.status(404).send("url does not exist !")
+    }
+
+    urldata.clicks++;
+    urldata.save()
+
+    res.redirect(urldata.full)
+})
+
 
 app.listen(process.env.PORT , () => console.log("Server is up ..."))
