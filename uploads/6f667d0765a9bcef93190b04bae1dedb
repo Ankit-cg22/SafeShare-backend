@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define BIG 1000000007
+#define fast_io ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define int long long 
+#define fr(i,a,b) for(int i = a; i < b; i++)
+#define frr(i,a,b) for(int i = a; i >= b; i--)
+#define pii pair<int,int>
+#define pll pair<ll , ll>
+#define vpll vector<pll>
+#define vi vector<int>
+#define vvi vector<vi>
+#define vst vector<string>
+#define vll vector<long long>
+#define vpii vector<pii>
+#define all(t) t.begin(),t.end()
+#define allr(t) t.rbegin(),t.rend()
+#define pb push_back
+#define show(x) cout<<(#x)<<" "<<x<<endl
+#define ull unsigned long long 
+ 
+using namespace std;
+ 
+const ll MOD = 1000000007;
+const ll INF = (ll)(1e18);
+ 
+// void printV(vector<auto> v){for(auto  x: v)cout<<x<<" ";cout<<"\n";}
+ll ceilDiv(ll a , ll b){return a/b + (a%b != 0);}
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+
+void test_case(int tstcse)
+{
+       
+}
+
+int32_t main() { 
+ 
+#ifndef ONLINE_JUDGE
+ 
+freopen("input.txt",  "r", stdin);
+ 
+freopen("output.txt", "w", stdout);
+ 
+#endif    
+ 
+fast_io;
+ 
+// cout << fixed << setprecision(9);
+
+ll t;
+// scanf("%lld",&t);
+cin>>t;
+// t=1;
+for(int i=1;i<=t;i++)test_case(i);
+ 
+}

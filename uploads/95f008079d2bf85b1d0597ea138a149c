@@ -1,0 +1,157 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define BIG 1000000007
+#define fast_io ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define int long long 
+#define fr(i,a,b) for(int i = a; i < b; i++)
+#define frr(i,a,b) for(int i = a; i >= b; i--)
+#define pii pair<int,int>
+#define pll pair<ll , ll>
+#define vpll vector<pll>
+#define vi vector<int>
+#define vvi vector<vi>
+#define vst vector<string>
+#define vll vector<long long>
+#define vpii vector<pii>
+#define all(t) t.begin(),t.end()
+#define allr(t) t.rbegin(),t.rend()
+#define pb push_back
+#define show(x) cout<<(#x)<<" "<<x<<endl
+#define ull unsigned long long 
+ 
+using namespace std;
+ 
+const ll MOD = 1000000007;
+const ll INF = (ll)(1e18);
+ 
+// void printV(vector<auto> v){for(auto  x: v)cout<<x<<" ";cout<<"\n";}
+ll ceilDiv(ll a , ll b){return a/b + (a%b != 0);}
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+ 
+// const int mxs = 2e6 + 5;
+// int fact[mxs] , inv_fact[mxs];
+ 
+// int modPow(int a , int b , int MOD)
+// {
+//     if(b == 0) return 1 ;
+ 
+//     int ans = modPow(a , b/2 , MOD );
+ 
+//     ans *= ans;
+//     ans %= MOD ;
+ 
+//     if(b % 2)
+//     {
+//         ans *= a;
+//         ans %= MOD ;
+//     }
+ 
+//     return ans ; 
+// }
+ 
+// void preProcess()
+// {
+//     fact[0] = 1;
+//     for(int i = 1 ; i<=mxs ; i++) 
+//     {
+//         fact[i] = (fact[i-1] * i) % MOD ;
+//     }
+ 
+//     // Fermat's little theorem 
+//     // inv_fact[mxs] = modPow(fact[mxs] , MOD-2 , MOD) ;   
+ 
+//     // for(int i = mxs-1; i >= 0 ; i--)
+//     // {
+//     //     inv_fact[i] = ((i+1) * inv_fact[i+1]) % MOD;
+//     // }
+ 
+ 
+// }
+
+// int nCr(int n , int r)
+// {
+//     if(n < r) return 0 ;
+
+//     int ans = fact[n] ;
+//     ans %= MOD ;
+
+//     ans *= inv_fact[r];
+//     ans %= MOD ;
+
+//     ans *= inv_fact[n-r];
+//     ans %= MOD ;
+
+//     return ans;
+// }
+
+/*
+   
+   f(a , b) :  we have a elements in group a and b elements in group b
+
+   > we can connect ai only one bi or not to any bi 
+
+   f( a , b )  = b * f(a-1 , b-1 ) + 1 * f( a-1 , b )
+   there are b ways that we connect to a node , this reduces the options for next node by 1
+   1 way that we connect to none of the nodes
+
+   if(b==0) return 1 ; 
+
+   final answer = f(a , b) * f(b , a) * f(a , c)
+
+
+                                  
+*/
+
+const int modd = 998244353;
+
+void test_case(int tstcse)
+{
+    int a , b , c;
+    cin >> a>> b >> c;
+
+    int mx =max({a , b, c});
+
+    vvi dp(mx+1 , vi(mx+1 , 1));
+
+    for(int i = 1 ; i<= mx ; i++)
+    {
+        for(int j = 0 ; j<=mx ; j++)
+        {
+            if(j==0)dp[i][j] = 1;
+            else{
+
+                dp[i][j] = (( j*dp[i-1][j-1]) % modd + dp[i-1][j]) % modd ;
+            }
+        }
+    }
+
+    int ans = dp[a][b];
+    ans *= dp[b][c];
+    ans %= modd;
+    ans *= dp[c][a];
+    ans %= modd;
+
+    cout<<ans<<"\n";
+}
+
+int32_t main() { 
+ 
+#ifndef ONLINE_JUDGE
+ 
+freopen("input.txt",  "r", stdin);
+ 
+freopen("output.txt", "w", stdout);
+ 
+#endif    
+ 
+fast_io;
+ 
+// cout << fixed << setprecision(9);
+// preProcess();
+ll t;
+// scanf("%lld",&t);
+// cin>>t;
+t=1;
+for(int i=1;i<=t;i++)test_case(i);
+ 
+}
